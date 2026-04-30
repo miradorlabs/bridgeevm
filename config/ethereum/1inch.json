@@ -1,0 +1,30 @@
+[
+  {
+    "chainName": "ethereum",
+    "bridgeName": "1inch",
+    "bridgeDescription": "1inch Fusion+ - SrcEscrowCreated (Source)",
+    "bridgeContract": { "address": "0xa7bcb4eac8964306f9e3764f67db6a7af6ddf99a" },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x0e534c62f0afd2fa0f0fa71198e8aa2d549f24daf2bb47de0d5486c7ce9288ca",
+      "name": "SrcEscrowCreated",
+      "correlation": [
+        {"index": 1, "type": "bytes32", "field": "hashlock", "source": "data"}
+      ]
+    }
+  },
+  {
+    "chainName": "ethereum",
+    "bridgeName": "1inch",
+    "bridgeDescription": "1inch Fusion+ - DstEscrowCreated (Destination)",
+    "bridgeContract": { "address": "0xa7bcb4eac8964306f9e3764f67db6a7af6ddf99a" },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0xc30e111dcc74fddc2c3a4d98ffb97adec4485c0a687946bf5b22c2a99c7ff96d",
+      "name": "DstEscrowCreated",
+      "correlation": [
+        {"index": 1, "type": "bytes32", "field": "hashlock", "source": "data"}
+      ]
+    }
+  }
+]

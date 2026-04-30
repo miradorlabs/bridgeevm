@@ -1,0 +1,34 @@
+[
+  {
+    "chainName": "ethereum",
+    "bridgeName": "debridge",
+    "bridgeDescription": "deBridge DLN - CreatedOrder (Source)",
+    "bridgeContract": {
+      "address": "0xeF4fB24aD0916217251F553c0596F8Edc630EB66"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0xfc8703fd57380f9dd234a89dce51333782d49c5902f307b02f03e014d18fe471",
+      "name": "CreatedOrder",
+      "correlation": [
+        {"index": 1, "type": "bytes32", "field": "orderId", "source": "data"}
+      ]
+    }
+  },
+  {
+    "chainName": "ethereum",
+    "bridgeName": "debridge",
+    "bridgeDescription": "deBridge DLN - FulfilledOrder (Destination)",
+    "bridgeContract": {
+      "address": "0xE7351Fd770A37282b91D153Ee690B63579D6dd7f"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0xd281ee92bab1446041582480d2c0a9dc91f855386bb27ea295faac1e992f7fe4",
+      "name": "FulfilledOrder",
+      "correlation": [
+        {"index": 1, "type": "bytes32", "field": "orderId", "source": "data"}
+      ]
+    }
+  }
+]
