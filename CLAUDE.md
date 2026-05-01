@@ -52,6 +52,39 @@ to Detector.Detect`) or a `BREAKING CHANGE:` footer. While we're pre-1.0,
 release-please bumps these as **minor**, not major (configured via
 `bump-minor-pre-major: true`).
 
+### Commit-message body rules
+
+release-please v17 uses the spec-strict `@conventional-commits/parser`,
+which tokenizes the **entire** message (subject + body + footers). If the
+parser errors anywhere, the **whole commit is silently skipped** — even
+when the subject is a valid `feat:`. That means a single bad body can
+prevent a release PR from being generated at all. Rules:
+
+- **No nested parens anywhere in the message.** The grammar treats `(` as
+  opening a scope and only allows a flat `)` to close it. `foo(bar(baz))`
+  in a body line will fail with `unexpected token '(' ... valid tokens
+  [)]`. Rewrite as `foo of bar of baz`, or split across lines.
+- **No unmatched parens.** Same reason.
+- **Don't start a body line with `<word>:` where `<word>` looks like a
+  conventional-commit type** (`feat:`, `fix:`, etc.) — the parser may
+  read it as a second header. Use a different phrasing or indent it.
+- **Squash-merge subjects must themselves be conventional.** GitHub's
+  default squash subject is the PR title — set the PR title to a clean
+  `type: subject` before merging. The bullet-list body that GitHub
+  generates from sub-commits is fine as long as the rules above hold.
+
+When in doubt, `git commit` then run `npx @conventional-commits/parser`
+on the message before pushing — easier than diagnosing a missing release
+PR after the fact.
+
+### Dependabot commits
+
+For Dependabot bumps to trigger patch releases, `.github/dependabot.yml`
+must use `commit-message.prefix: deps` for both `gomod` and
+`github-actions` ecosystems. With any other prefix (`chore`, `ci`,
+`build`) the commits are hidden in `release-please-config.json` and
+produce no bump.
+
 ### DCO sign-off
 
 Every commit must be signed off (`Signed-off-by: ...` trailer). Always
