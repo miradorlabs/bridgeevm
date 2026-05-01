@@ -1,0 +1,44 @@
+[
+  {
+    "chainName": "base",
+    "bridgeName": "stargate",
+    "bridgeDescription": "Stargate V2 Pool USDC - OFTSent (Source)",
+    "bridgeContract": {
+      "address": "0xe8CDF27AcD73a434D661C84887215F7598e7d0d3"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x85496b760a4b7f8d66384b9df21b381f5d1b1e79f229a47aaf4c232edc2fe59a",
+      "name": "OFTSent",
+      "correlation": [
+        {
+          "index": 1,
+          "type": "bytes32",
+          "field": "guid",
+          "source": "topics"
+        }
+      ]
+    }
+  },
+  {
+    "chainName": "base",
+    "bridgeName": "stargate",
+    "bridgeDescription": "Stargate V2 Pool USDC - OFTReceived (Destination)",
+    "bridgeContract": {
+      "address": "0xe8CDF27AcD73a434D661C84887215F7598e7d0d3"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0xefed6d3500546b29533b128a29e3a94d70788727f0507505ac12eaf2e578fd9c",
+      "name": "OFTReceived",
+      "correlation": [
+        {
+          "index": 1,
+          "type": "bytes32",
+          "field": "guid",
+          "source": "topics"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "chainName": "ethereum",
+    "bridgeName": "usdt0",
+    "bridgeDescription": "USDT0 OFT - OFTSent (Source)",
+    "bridgeContract": {
+      "address": "0x6C96dE32CEa08842dcc4058c14d3aaAD7Fa41dee"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x85496b760a4b7f8d66384b9df21b381f5d1b1e79f229a47aaf4c232edc2fe59a",
+      "name": "OFTSent",
+      "correlation": [
+        {"index": 1, "type": "bytes32", "field": "guid", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "ethereum",
+    "bridgeName": "usdt0",
+    "bridgeDescription": "USDT0 OFT - OFTReceived (Destination)",
+    "bridgeContract": {
+      "address": "0x6C96dE32CEa08842dcc4058c14d3aaAD7Fa41dee"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0xefed6d3500546b29533b128a29e3a94d70788727f0507505ac12eaf2e578fd9c",
+      "name": "OFTReceived",
+      "correlation": [
+        {"index": 1, "type": "bytes32", "field": "guid", "source": "topics"}
+      ]
+    }
+  }
+]

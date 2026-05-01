@@ -1,0 +1,82 @@
+[
+  {
+    "chainName": "optimism",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 2",
+    "bridgeContract": {
+      "address": "0x6f26Bf09B1C792e3228e5467807a900A503c0281"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0xafc4df6845a4ab948b492800d3d8a25d538a102a2bc07cd01f1cfa097fddcff6",
+      "name": "FundsDeposited",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "optimism",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 2",
+    "bridgeContract": {
+      "address": "0x6f26Bf09B1C792e3228e5467807a900A503c0281"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0x44b559f101f8fbcc8a0ea43fa91a05a729a5ea6e14a7c75aa750374690137208",
+      "name": "FilledRelay",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "optimism",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 3",
+    "bridgeContract": {
+      "address": "0x6f26Bf09B1C792e3228e5467807a900A503c0281"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x32ed1a409ef04c7b0227189c3a103dc5ac10e775a15b785dcc510201f7c25ad3",
+      "name": "FundsDeposited",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "optimism",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 3 (V3FundsDeposited)",
+    "bridgeContract": {
+      "address": "0x6f26Bf09B1C792e3228e5467807a900A503c0281"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0xa123dc29aebf7d0c3322c8eeb5b999e859f39937950ed31056532713d0de396f",
+      "name": "V3FundsDeposited",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "optimism",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 3",
+    "bridgeContract": {
+      "address": "0x6f26Bf09B1C792e3228e5467807a900A503c0281"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0x571749edf1d5c9599318cdbc4e28a6475d65e87fd3b2ddbe1e9a8d5e7a0f0ff7",
+      "name": "FilledV3Relay",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "chainName": "anvil",
+    "bridgeName": "anvil-test",
+    "bridgeDescription": "Integration test subscription",
+    "bridgeContract": {
+      "address": "0x0000000000000000000000000000000000000001"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "name": "TestLog",
+      "correlation": [
+        {"index": 0, "type": "bytes32", "field": "testId", "source": "topics"}
+      ]
+    }
+  }
+]
