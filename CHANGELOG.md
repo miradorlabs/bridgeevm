@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/miradorlabs/bridgeevm/compare/v0.1.0...v0.2.0) (2026-05-01)
+
+
+### Features
+
+* expose Subscriptions accessor for filter-query consumers ([f15c1ef](https://github.com/miradorlabs/bridgeevm/commit/f15c1efcd7a22b8c584f885991833bc0b5227c64))
+* expose Subscriptions accessor for filter-query consumers ([59cd77d](https://github.com/miradorlabs/bridgeevm/commit/59cd77d4ac7f6218fa83d53916cc5af2c436bb57))
+
 ## 0.1.0 (2026-05-01)
 
 
