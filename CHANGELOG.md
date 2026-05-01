@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/miradorlabs/bridgeevm/compare/v0.2.0...v0.2.1) (2026-05-01)
+
+
+### Code Refactoring
+
+* add Addresses and Topics accessors for FilterQuery consumers ([#14](https://github.com/miradorlabs/bridgeevm/issues/14)) ([4e13bf2](https://github.com/miradorlabs/bridgeevm/commit/4e13bf2f7caff637bb6d9785987126effccb8dba))
+
 ## [0.2.0](https://github.com/miradorlabs/bridgeevm/compare/v0.1.0...v0.2.0) (2026-05-01)
 
 
