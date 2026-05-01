@@ -59,7 +59,7 @@ jobs:
           fetch-depth: 0
 
       - name: Validate Conventional Commits
-        uses: webiny/action-conventional-commits@v1.3.0
+        uses: webiny/action-conventional-commits@v1.4.2
 
   dco:
     name: DCO sign-off
