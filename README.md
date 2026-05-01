@@ -18,7 +18,7 @@ import (
     "github.com/miradorlabs/bridgeevm"
 )
 
-detector, err := bridgeevm.New("ethereum")
+detector, err := bridgeevm.New(bridgeevm.ChainEthereum)
 if err != nil {
     log.Fatal(err)
 }

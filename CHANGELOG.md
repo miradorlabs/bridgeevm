@@ -11,6 +11,10 @@ breaking API changes; patch releases (`0.x.y`) will not.
 ## [Unreleased]
 
 ### Added
+- Exported `Chain*` string constants (`ChainEthereum`, `ChainPolygon`,
+  `ChainArbitrum`, `ChainBase`, `ChainOptimism`, `ChainBSC`) for the
+  supported chain identifiers, so callers can pass
+  `bridgeevm.New(bridgeevm.ChainEthereum)` instead of a freeform string.
 - `Detector.Len()` returns the number of configured `(address, topic)`
   subscriptions for the chain.
 - Runnable godoc examples for `New` and `Detector.Detect`.

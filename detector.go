@@ -26,9 +26,9 @@ type subscription struct {
 }
 
 // New loads the embedded bridge configs for the given chain (case-insensitive)
-// and returns a Detector with an O(1) address+topic lookup. Calling New for an
-// unknown chain returns a usable Detector with no subscriptions; Detect will
-// always return ok=false.
+// and returns a Detector with an O(1) address+topic lookup. Pass one of the
+// Chain* constants for the supported set; any other string returns a usable
+// Detector with no subscriptions, and Detect will always return ok=false.
 func New(chainName string) (*Detector, error) {
 	cfgs, err := configsForChain(chainName)
 	if err != nil {
