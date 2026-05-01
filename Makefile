@@ -5,7 +5,7 @@ HOOKS_SRC := .githooks
 HOOKS_DEST := .git/hooks
 
 LOCAL_BIN := $(CURDIR)/bin
-GOLANGCI_LINT_VERSION ?= v2.1.6
+GOLANGCI_LINT_VERSION ?= v2.11.4
 # Prefer the pinned local install if present; otherwise fall back to PATH.
 GOLANGCI_LINT ?= $(shell test -x $(LOCAL_BIN)/golangci-lint && echo $(LOCAL_BIN)/golangci-lint || echo golangci-lint)
 
