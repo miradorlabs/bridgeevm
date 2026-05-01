@@ -130,6 +130,38 @@ func (d *Detector) Subscriptions() []Subscription {
 	return out
 }
 
+func (d *Detector) Addresses() []common.Address {
+	seen := make(map[common.Address]struct{}, len(d.subscriptions))
+	out := make([]common.Address, 0, len(d.subscriptions))
+	for _, sub := range d.subscriptions {
+		if _, ok := seen[sub.address]; ok {
+			continue
+		}
+		seen[sub.address] = struct{}{}
+		out = append(out, sub.address)
+	}
+	sort.Slice(out, func(i, j int) bool {
+		return bytes.Compare(out[i][:], out[j][:]) < 0
+	})
+	return out
+}
+
+func (d *Detector) Topics() []common.Hash {
+	seen := make(map[common.Hash]struct{}, len(d.subscriptions))
+	out := make([]common.Hash, 0, len(d.subscriptions))
+	for _, sub := range d.subscriptions {
+		if _, ok := seen[sub.eventSignature]; ok {
+			continue
+		}
+		seen[sub.eventSignature] = struct{}{}
+		out = append(out, sub.eventSignature)
+	}
+	sort.Slice(out, func(i, j int) bool {
+		return bytes.Compare(out[i][:], out[j][:]) < 0
+	})
+	return out
+}
+
 func makeLookupKey(address common.Address, topic common.Hash) lookupKey {
 	var k lookupKey
 	copy(k[:common.AddressLength], address[:])

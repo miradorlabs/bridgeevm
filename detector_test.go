@@ -240,3 +240,92 @@ func TestSubscriptions_RoundTripsThroughDetect(t *testing.T) {
 		})
 	}
 }
+
+func TestAddresses_Ethereum(t *testing.T) {
+	d, err := New("ethereum")
+	require.NoError(t, err)
+
+	addrs := d.Addresses()
+	require.NotEmpty(t, addrs)
+
+	var zero common.Address
+	seen := make(map[common.Address]struct{}, len(addrs))
+	for _, a := range addrs {
+		assert.NotEqual(t, zero, a, "address must not be zero value")
+		_, dup := seen[a]
+		assert.False(t, dup, "address %s appears twice", a.Hex())
+		seen[a] = struct{}{}
+	}
+}
+
+func TestTopics_Ethereum(t *testing.T) {
+	d, err := New("ethereum")
+	require.NoError(t, err)
+
+	topics := d.Topics()
+	require.NotEmpty(t, topics)
+
+	var zero common.Hash
+	seen := make(map[common.Hash]struct{}, len(topics))
+	for _, h := range topics {
+		assert.NotEqual(t, zero, h, "topic must not be zero value")
+		_, dup := seen[h]
+		assert.False(t, dup, "topic %s appears twice", h.Hex())
+		seen[h] = struct{}{}
+	}
+}
+
+func TestAddresses_UnknownChain(t *testing.T) {
+	d, err := New("unknownchain")
+	require.NoError(t, err)
+	assert.Equal(t, 0, len(d.Addresses()))
+}
+
+func TestTopics_UnknownChain(t *testing.T) {
+	d, err := New("unknownchain")
+	require.NoError(t, err)
+	assert.Equal(t, 0, len(d.Topics()))
+}
+
+func TestAddresses_Deterministic(t *testing.T) {
+	d, err := New("ethereum")
+	require.NoError(t, err)
+	assert.Equal(t, d.Addresses(), d.Addresses())
+}
+
+func TestTopics_Deterministic(t *testing.T) {
+	d, err := New("ethereum")
+	require.NoError(t, err)
+	assert.Equal(t, d.Topics(), d.Topics())
+}
+
+func TestAddressesAndTopics_MatchSubscriptions(t *testing.T) {
+	for _, chain := range []string{ChainArbitrum, ChainBase, ChainBSC, ChainEthereum, ChainOptimism, ChainPolygon} {
+		t.Run(chain, func(t *testing.T) {
+			d, err := New(chain)
+			require.NoError(t, err)
+
+			wantAddrs := make(map[common.Address]struct{})
+			wantTopics := make(map[common.Hash]struct{})
+			for _, s := range d.Subscriptions() {
+				wantAddrs[s.BridgeAddress] = struct{}{}
+				wantTopics[s.EventSignature] = struct{}{}
+			}
+
+			gotAddrs := d.Addresses()
+			gotTopics := d.Topics()
+
+			assert.Equal(t, len(wantAddrs), len(gotAddrs))
+			for _, a := range gotAddrs {
+				_, ok := wantAddrs[a]
+				assert.True(t, ok, "Addresses returned %s not present in Subscriptions", a.Hex())
+			}
+
+			assert.Equal(t, len(wantTopics), len(gotTopics))
+			for _, h := range gotTopics {
+				_, ok := wantTopics[h]
+				assert.True(t, ok, "Topics returned %s not present in Subscriptions", h.Hex())
+			}
+		})
+	}
+}
