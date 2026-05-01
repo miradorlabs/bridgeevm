@@ -8,7 +8,8 @@
   "prerelease": false,
   "packages": {
     ".": {
-      "package-name": "bridgeevm"
+      "package-name": "bridgeevm",
+      "initial-version": "0.1.0"
     }
   },
   "changelog-sections": [
