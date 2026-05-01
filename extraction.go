@@ -123,11 +123,11 @@ func extractFromAbiBytesHash(log *types.Log, field correlationField) (string, er
 // of the offset word that points to the dynamic bytes payload.
 //
 // Defense in depth: log.Data is attacker-controllable for any contract that
-// emits matching topic[0]. We reject any offset or length that exceeds
-// MaxInt32 *before* narrowing to a Go int — checking the big.Int directly
-// rather than after Uint64(), which would silently truncate values above
-// 2^64. There is no legitimate use case for a single log carrying >2GiB of
-// payload.
+// emits matching topic[0]. readBoundedWord rejects any offset or length that
+// exceeds MaxInt32 by inspecting the raw 32-byte word directly (bytes 0..27
+// must be zero, byte 28 must have its MSB clear), so values larger than 2^64
+// cannot silently truncate past the cap. There is no legitimate use case for
+// a single log carrying >2GiB of payload.
 func readAbiBytesParam(log *types.Log, bytesIndex int) ([]byte, error) {
 	const wordSize = 32
 
@@ -165,6 +165,9 @@ func readAbiBytesParam(log *types.Log, bytesIndex int) ([]byte, error) {
 // any value above MaxInt32. The first 28 bytes must be zero and byte 28 must
 // have its MSB clear; this rejects anything larger without narrowing through
 // uint64, so values > 2^64 cannot silently truncate past the cap.
+//
+// word must be exactly 32 bytes (one EVM ABI word); shorter slices will panic.
+// All current callers pass log.Data[x : x+wordSize] with wordSize == 32.
 func readBoundedWord(word []byte) (uint64, error) {
 	for i := 0; i < 28; i++ {
 		if word[i] != 0 {

@@ -36,6 +36,6 @@ func TestChainConstantsMatchConfigDirs(t *testing.T) {
 	}
 	sort.Strings(dirs)
 
-	assert.Equal(t, dirs, declared,
+	assert.Equal(t, declared, dirs,
 		"Chain* constants in chains.go must mirror config/ subdirectories exactly")
 }
