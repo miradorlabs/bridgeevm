@@ -5,7 +5,7 @@ HOOKS_SRC := .githooks
 HOOKS_DEST := .git/hooks
 
 LOCAL_BIN := $(CURDIR)/bin
-GOLANGCI_LINT_VERSION ?= v1.62.2
+GOLANGCI_LINT_VERSION ?= v2.1.6
 # Prefer the pinned local install if present; otherwise fall back to PATH.
 GOLANGCI_LINT ?= $(shell test -x $(LOCAL_BIN)/golangci-lint && echo $(LOCAL_BIN)/golangci-lint || echo golangci-lint)
 
@@ -39,7 +39,7 @@ tidy: ## Tidy go.mod and go.sum.
 
 tools: ## Install pinned dev tools (golangci-lint) into ./bin.
 	@mkdir -p $(LOCAL_BIN)
-	GOBIN=$(LOCAL_BIN) $(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@$(GOLANGCI_LINT_VERSION)
+	GOBIN=$(LOCAL_BIN) $(GO) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@$(GOLANGCI_LINT_VERSION)
 	@echo "Installed: $(LOCAL_BIN)/golangci-lint ($(GOLANGCI_LINT_VERSION))"
 
 verify: fmt vet lint test ## Run the full local check suite. Run before pushing.

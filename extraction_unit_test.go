@@ -283,6 +283,7 @@ func TestDecodeCorrelationValue(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.typ, func(t *testing.T) {
+			t.Parallel()
 			got, err := decodeCorrelationValue(tc.hash, tc.typ)
 			if tc.wantErr != "" {
 				require.Error(t, err)

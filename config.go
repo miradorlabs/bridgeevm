@@ -16,11 +16,9 @@ import (
 //go:embed config/*/*.json
 var bridgeConfigFS embed.FS
 
-var (
-	loadOnce       sync.Once
-	loadErr        error
-	configsByChain map[string][]*bridgeConfig
-)
+var loadConfigs = sync.OnceValues(func() (map[string][]*bridgeConfig, error) {
+	return loadBridgeConfigs(bridgeConfigFS)
+})
 
 type bridgeConfig struct {
 	ChainName         string          `json:"chainName"`
@@ -56,17 +54,11 @@ type correlationField struct {
 }
 
 func configsForChain(chain string) ([]*bridgeConfig, error) {
-	if err := ensureLoaded(); err != nil {
+	configs, err := loadConfigs()
+	if err != nil {
 		return nil, err
 	}
-	return configsByChain[strings.ToLower(chain)], nil
-}
-
-func ensureLoaded() error {
-	loadOnce.Do(func() {
-		configsByChain, loadErr = loadBridgeConfigs(bridgeConfigFS)
-	})
-	return loadErr
+	return configs[strings.ToLower(chain)], nil
 }
 
 // subscriptionKey identifies a unique (chain, address, topic) tuple. It is
@@ -255,12 +247,12 @@ func ensureValidHash(value string) error {
 	if !strings.HasPrefix(value, "0x") {
 		return fmt.Errorf("value %q missing 0x prefix", value)
 	}
-	bytes, err := hex.DecodeString(strings.TrimPrefix(value, "0x"))
+	decoded, err := hex.DecodeString(strings.TrimPrefix(value, "0x"))
 	if err != nil {
 		return fmt.Errorf("value %q is not hex: %w", value, err)
 	}
-	if len(bytes) != common.HashLength {
-		return fmt.Errorf("value %q is %d bytes; expected %d", value, len(bytes), common.HashLength)
+	if len(decoded) != common.HashLength {
+		return fmt.Errorf("value %q is %d bytes; expected %d", value, len(decoded), common.HashLength)
 	}
 	return nil
 }

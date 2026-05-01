@@ -161,16 +161,20 @@ func readAbiBytesParam(log *types.Log, bytesIndex int) ([]byte, error) {
 	return log.Data[dataStart : dataStart+length], nil
 }
 
-// readBoundedWord interprets word as a big-endian uint and returns it as a
-// uint64, rejecting any value above MaxInt32. It checks bit length before
-// narrowing so values larger than MaxUint64 cannot silently truncate past
-// the cap.
+// readBoundedWord interprets a 32-byte big-endian word as a uint64, rejecting
+// any value above MaxInt32. The first 28 bytes must be zero and byte 28 must
+// have its MSB clear; this rejects anything larger without narrowing through
+// uint64, so values > 2^64 cannot silently truncate past the cap.
 func readBoundedWord(word []byte) (uint64, error) {
-	v := new(big.Int).SetBytes(word)
-	if v.BitLen() > 31 {
+	for i := 0; i < 28; i++ {
+		if word[i] != 0 {
+			return 0, fmt.Errorf("exceeds max %d", math.MaxInt32)
+		}
+	}
+	if word[28] > 0x7f {
 		return 0, fmt.Errorf("exceeds max %d", math.MaxInt32)
 	}
-	return v.Uint64(), nil
+	return uint64(word[28])<<24 | uint64(word[29])<<16 | uint64(word[30])<<8 | uint64(word[31]), nil
 }
 
 // decodeCorrelationValue renders a 32-byte word as a string keyed off the ABI

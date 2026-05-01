@@ -164,6 +164,7 @@ func TestLoadBridgeConfigs_Rejections(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
 			fsys := fstest.MapFS{tc.path: {Data: []byte(tc.body)}}
 			_, err := loadBridgeConfigs(fsys)
 			require.Error(t, err)
