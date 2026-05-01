@@ -61,7 +61,7 @@ Signed-off-by: Your Name <you@example.com>
 ### Suggested scopes
 
 - `config` — bridge config additions or updates
-- `detector` — `Detector`, `New`, `Identify`
+- `detector` — `Detector`, `New`, `Detect`
 - `extraction` — correlation-ID extraction logic
 - `testdata` — fixtures under `testdata/`
 - `deps` — dependency updates

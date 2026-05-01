@@ -20,12 +20,12 @@ log := &types.Log{
     Data:    common.FromHex("0x..."),
 }
 
-result, ok, err := bridgeevm.New("ethereum").Identify(log)
+result, ok, err := bridgeevm.New("ethereum").Detect(log)
 ```
 
 **Expected behaviour**
 
-What you expected `Identify` to return.
+What you expected `Detect` to return.
 
 **Actual behaviour**
 

@@ -47,7 +47,7 @@ type bridgeTestLeg struct {
 }
 
 // TestCorrelation_AllProtocols loads real source/destination tx pairs from
-// embedded test data and verifies that Detector.Identify produces the same
+// embedded test data and verifies that Detector.Detect produces the same
 // correlation ID on both legs and matches the expected value.
 func TestCorrelation_AllProtocols(t *testing.T) {
 	suites := []struct {
@@ -70,8 +70,8 @@ func TestCorrelation_AllProtocols(t *testing.T) {
 
 			for _, tc := range cases {
 				t.Run(tc.Description, func(t *testing.T) {
-					sourceResult := identifyOrFatal(t, tc.Source)
-					destResult := identifyOrFatal(t, tc.Destination)
+					sourceResult := detectOrFatal(t, tc.Source)
+					destResult := detectOrFatal(t, tc.Destination)
 
 					assert.Equal(t, tc.Bridge, sourceResult.BridgeName)
 					assert.Equal(t, LegTypeSource, sourceResult.LegType)
@@ -90,15 +90,15 @@ func TestCorrelation_AllProtocols(t *testing.T) {
 	}
 }
 
-func identifyOrFatal(t *testing.T, leg bridgeTestLeg) Result {
+func detectOrFatal(t *testing.T, leg bridgeTestLeg) Result {
 	t.Helper()
 
 	d, err := New(leg.Chain)
 	require.NoError(t, err)
 
-	result, ok, err := d.Identify(buildLogFromLeg(leg))
+	result, ok, err := d.Detect(buildLogFromLeg(leg))
 	require.NoError(t, err)
-	require.True(t, ok, "expected log on chain %s to identify as a bridge", leg.Chain)
+	require.True(t, ok, "expected log on chain %s to be detected as a bridge", leg.Chain)
 	return result
 }
 

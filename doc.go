@@ -1,7 +1,7 @@
-// Package bridgeevm identifies cross-chain bridge events from EVM transaction logs.
+// Package bridgeevm detects cross-chain bridge events from EVM transaction logs.
 //
-// A Detector is built once per chain. Pass any *types.Log to Identify; if the log
-// matches a known bridge event, Identify returns a Result describing the bridge,
+// A Detector is built once per chain. Pass any *types.Log to Detect; if the log
+// matches a known bridge event, Detect returns a Result describing the bridge,
 // the leg type (source or destination), and the extracted correlation ID that
 // links the leg to its counterpart on the other chain.
 //

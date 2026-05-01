@@ -27,7 +27,7 @@ type subscription struct {
 
 // New loads the embedded bridge configs for the given chain (case-insensitive)
 // and returns a Detector with an O(1) address+topic lookup. Calling New for an
-// unknown chain returns a usable Detector with no subscriptions; Identify will
+// unknown chain returns a usable Detector with no subscriptions; Detect will
 // always return ok=false.
 func New(chainName string) (*Detector, error) {
 	cfgs, err := configsForChain(chainName)
@@ -58,14 +58,14 @@ func New(chainName string) (*Detector, error) {
 	}, nil
 }
 
-// Identify returns the bridge details for log if it matches a known bridge.
+// Detect returns the bridge details for log if it matches a known bridge.
 //
 // The boolean indicates whether a configured bridge matched the log's
 // (address, topic[0]) pair. The error is non-nil only when a bridge matched but
 // correlation extraction failed (malformed log data); in that case the boolean
 // is true and Result is the zero value. Callers that just want to know
 // "is this a bridge?" can ignore the error.
-func (d *Detector) Identify(log *types.Log) (Result, bool, error) {
+func (d *Detector) Detect(log *types.Log) (Result, bool, error) {
 	if log == nil || len(log.Topics) == 0 {
 		return Result{}, false, nil
 	}
@@ -95,7 +95,7 @@ func (d *Detector) Identify(log *types.Log) (Result, bool, error) {
 func (d *Detector) ChainName() string { return d.chainName }
 
 // Len returns the number of (address, topic) subscriptions configured for this
-// chain. A Detector with Len() == 0 will always return ok=false from Identify;
+// chain. A Detector with Len() == 0 will always return ok=false from Detect;
 // callers can use this to detect chains that have no embedded coverage.
 func (d *Detector) Len() int { return len(d.subscriptions) }
 

@@ -29,17 +29,17 @@ func TestNew_UnknownChain(t *testing.T) {
 	assert.Equal(t, 0, d.Len())
 }
 
-func TestIdentify_NilLog(t *testing.T) {
+func TestDetect_NilLog(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 
-	result, ok, err := d.Identify(nil)
+	result, ok, err := d.Detect(nil)
 	require.NoError(t, err)
 	assert.False(t, ok)
 	assert.Equal(t, Result{}, result)
 }
 
-func TestIdentify_LogWithNoTopics(t *testing.T) {
+func TestDetect_LogWithNoTopics(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 
@@ -47,13 +47,13 @@ func TestIdentify_LogWithNoTopics(t *testing.T) {
 		Address: common.HexToAddress("0x1234567890123456789012345678901234567890"),
 		Topics:  []common.Hash{},
 	}
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	require.NoError(t, err)
 	assert.False(t, ok)
 	assert.Equal(t, Result{}, result)
 }
 
-func TestIdentify_NoMatch(t *testing.T) {
+func TestDetect_NoMatch(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 
@@ -61,13 +61,13 @@ func TestIdentify_NoMatch(t *testing.T) {
 		Address: common.HexToAddress("0x1234567890123456789012345678901234567890"),
 		Topics:  []common.Hash{common.HexToHash("0xabcd")},
 	}
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	require.NoError(t, err)
 	assert.False(t, ok)
 	assert.Equal(t, Result{}, result)
 }
 
-func TestIdentify_AcrossV3Source(t *testing.T) {
+func TestDetect_AcrossV3Source(t *testing.T) {
 	d, err := New("arbitrum")
 	require.NoError(t, err)
 
@@ -84,7 +84,7 @@ func TestIdentify_AcrossV3Source(t *testing.T) {
 		},
 	}
 
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	require.NoError(t, err)
 	require.True(t, ok)
 	assert.Equal(t, "across", result.BridgeName)
@@ -94,7 +94,7 @@ func TestIdentify_AcrossV3Source(t *testing.T) {
 	assert.NotEmpty(t, result.CorrelationID)
 }
 
-func TestIdentify_CCTPSourceFromRealTx(t *testing.T) {
+func TestDetect_CCTPSourceFromRealTx(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 
@@ -111,7 +111,7 @@ func TestIdentify_CCTPSourceFromRealTx(t *testing.T) {
 		Data:    data,
 	}
 
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	require.NoError(t, err)
 	require.True(t, ok)
 	assert.Equal(t, "cctp", result.BridgeName)
@@ -119,7 +119,7 @@ func TestIdentify_CCTPSourceFromRealTx(t *testing.T) {
 	assert.NotEmpty(t, result.CorrelationID)
 }
 
-func TestIdentify_USDT0SourceFromRealTx(t *testing.T) {
+func TestDetect_USDT0SourceFromRealTx(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 
@@ -137,7 +137,7 @@ func TestIdentify_USDT0SourceFromRealTx(t *testing.T) {
 		Data: common.FromHex("0x000000000000000000000000000000000000000000000000000000000000759e0000000000000000000000000000000000000000000000000000000005c7a8900000000000000000000000000000000000000000000000000000000005c7a890"),
 	}
 
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	require.NoError(t, err)
 	require.True(t, ok)
 	assert.Equal(t, "usdt0", result.BridgeName)
@@ -145,12 +145,12 @@ func TestIdentify_USDT0SourceFromRealTx(t *testing.T) {
 	assert.Equal(t, expectedGUID, result.CorrelationID)
 }
 
-// TestIdentify_MatchedButMalformed exercises the documented
-// (Result{}, true, err) branch on Identify: a log whose (address, topic[0])
+// TestDetect_MatchedButMalformed exercises the documented
+// (Result{}, true, err) branch on Detect: a log whose (address, topic[0])
 // matches a configured bridge but whose Data is too short for correlation
 // extraction to succeed. CCTP source uses an abi_bytes payload, so a log
 // with empty Data forces readAbiBytesParam to error.
-func TestIdentify_MatchedButMalformed(t *testing.T) {
+func TestDetect_MatchedButMalformed(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 
@@ -163,14 +163,14 @@ func TestIdentify_MatchedButMalformed(t *testing.T) {
 		Data:    nil, // matched bridge, but no data — extraction will fail
 	}
 
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	require.Error(t, err)
 	assert.True(t, ok, "ok must be true: a configured bridge matched")
 	assert.Equal(t, Result{}, result, "Result must be zero on extraction failure")
 	assert.Contains(t, err.Error(), "bridge cctp:")
 }
 
-func TestIdentify_SubscriptionsCoverBothLegTypes(t *testing.T) {
+func TestDetect_SubscriptionsCoverBothLegTypes(t *testing.T) {
 	d, err := New("ethereum")
 	require.NoError(t, err)
 

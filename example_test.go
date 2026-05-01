@@ -20,9 +20,9 @@ func ExampleNew() {
 	// Output: ethereum true
 }
 
-// ExampleDetector_Identify shows the common path: hand any *types.Log to
-// Identify and read the bridge name, leg, and correlation ID off the result.
-func ExampleDetector_Identify() {
+// ExampleDetector_Detect shows the common path: hand any *types.Log to
+// Detect and read the bridge name, leg, and correlation ID off the result.
+func ExampleDetector_Detect() {
 	d, _ := bridgeevm.New("arbitrum")
 
 	log := &types.Log{
@@ -35,7 +35,7 @@ func ExampleDetector_Identify() {
 		},
 	}
 
-	result, ok, err := d.Identify(log)
+	result, ok, err := d.Detect(log)
 	if err != nil {
 		// A bridge matched but its data was malformed; the boolean is true.
 		panic(err)
@@ -49,10 +49,10 @@ func ExampleDetector_Identify() {
 	// Output: across source leg, correlation 50254707460338143966371593114785553611174598192372265612265721490268521529575
 }
 
-// ExampleDetector_Identify_unknownLog shows that Identify returns ok=false
+// ExampleDetector_Detect_unknownLog shows that Detect returns ok=false
 // (with no error) for the common case of a log that does not match any
 // configured bridge.
-func ExampleDetector_Identify_unknownLog() {
+func ExampleDetector_Detect_unknownLog() {
 	d, _ := bridgeevm.New("ethereum")
 
 	log := &types.Log{
@@ -60,7 +60,7 @@ func ExampleDetector_Identify_unknownLog() {
 		Topics:  []common.Hash{common.HexToHash("0xdeadbeef")},
 	}
 
-	_, ok, err := d.Identify(log)
+	_, ok, err := d.Detect(log)
 	fmt.Println(ok, errors.Is(err, nil))
 	// Output: false true
 }

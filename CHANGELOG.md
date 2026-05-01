@@ -13,8 +13,8 @@ breaking API changes; patch releases (`0.x.y`) will not.
 ### Added
 - `Detector.Len()` returns the number of configured `(address, topic)`
   subscriptions for the chain.
-- Runnable godoc examples for `New` and `Detector.Identify`.
-- Benchmarks (`BenchmarkIdentify_Hit`, `BenchmarkIdentify_Miss`,
+- Runnable godoc examples for `New` and `Detector.Detect`.
+- Benchmarks (`BenchmarkDetect_Hit`, `BenchmarkDetect_Miss`,
   `BenchmarkLookupKey`) — `Miss` and the lookup key are 0 allocs/op.
 - `doc.go` carrying the package-level godoc.
 - Load-time validation rejects bridge configs with an invalid
@@ -33,7 +33,7 @@ breaking API changes; patch releases (`0.x.y`) will not.
 - Module path renamed from `github.com/miradorlabs/bridge-detect-evm`
   to `github.com/miradorlabs/bridgeevm` so that the last path component
   matches the package name. Consumers must update their imports.
-- Map lookup key in `Detector.Identify` is now a fixed-size byte array
+- Map lookup key in `Detector.Detect` is now a fixed-size byte array
   instead of a concatenated string, eliminating per-call allocations on
   the hot path.
 - `correlationField.Source` and `correlationField.Type` are normalized
@@ -65,4 +65,4 @@ breaking API changes; patch releases (`0.x.y`) will not.
   now declare `"type": "bytes32"` to match the actual output shape, and
   the new load-time type validation ensures this can't drift again.
 - README claim that the hot path is allocation-free is now accurate
-  (verified by `BenchmarkIdentify_Miss` and `BenchmarkLookupKey`).
+  (verified by `BenchmarkDetect_Miss` and `BenchmarkLookupKey`).

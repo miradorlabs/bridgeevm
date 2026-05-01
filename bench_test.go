@@ -7,10 +7,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-// BenchmarkIdentify_Hit measures the hot path on a log that matches a known
+// BenchmarkDetect_Hit measures the hot path on a log that matches a known
 // bridge. The lookup itself is allocation-free (fixed-size array key);
 // allocations come from correlation ID extraction (string assembly).
-func BenchmarkIdentify_Hit(b *testing.B) {
+func BenchmarkDetect_Hit(b *testing.B) {
 	d, err := New("arbitrum")
 	if err != nil {
 		b.Fatal(err)
@@ -27,13 +27,13 @@ func BenchmarkIdentify_Hit(b *testing.B) {
 
 	b.ReportAllocs()
 	for b.Loop() {
-		_, _, _ = d.Identify(log)
+		_, _, _ = d.Detect(log)
 	}
 }
 
-// BenchmarkIdentify_Miss measures the common case: an arbitrary log that
+// BenchmarkDetect_Miss measures the common case: an arbitrary log that
 // does not match any known bridge. This path should be zero-alloc.
-func BenchmarkIdentify_Miss(b *testing.B) {
+func BenchmarkDetect_Miss(b *testing.B) {
 	d, err := New("ethereum")
 	if err != nil {
 		b.Fatal(err)
@@ -45,7 +45,7 @@ func BenchmarkIdentify_Miss(b *testing.B) {
 
 	b.ReportAllocs()
 	for b.Loop() {
-		_, _, _ = d.Identify(log)
+		_, _, _ = d.Detect(log)
 	}
 }
 
