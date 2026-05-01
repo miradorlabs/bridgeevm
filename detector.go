@@ -1,7 +1,9 @@
 package bridgeevm
 
 import (
+	"bytes"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -98,6 +100,35 @@ func (d *Detector) ChainName() string { return d.chainName }
 // chain. A Detector with Len() == 0 will always return ok=false from Detect;
 // callers can use this to detect chains that have no embedded coverage.
 func (d *Detector) Len() int { return len(d.subscriptions) }
+
+// Subscription is a (contract, event-topic) pair the Detector matches against.
+// Consumers building an eth_subscribeFilterLogs FilterQuery iterate
+// Subscriptions and pass the deduped addresses and topics into the query.
+type Subscription struct {
+	BridgeAddress  common.Address
+	EventSignature common.Hash
+}
+
+// Subscriptions returns every (address, topic) pair this Detector watches.
+// Order is deterministic across calls, sorted by address bytes then topic
+// bytes, so callers can build stable FilterQuery payloads. The returned
+// slice is freshly allocated on each call; callers may mutate it.
+func (d *Detector) Subscriptions() []Subscription {
+	out := make([]Subscription, 0, len(d.subscriptions))
+	for _, sub := range d.subscriptions {
+		out = append(out, Subscription{
+			BridgeAddress:  sub.address,
+			EventSignature: sub.eventSignature,
+		})
+	}
+	sort.Slice(out, func(i, j int) bool {
+		if c := bytes.Compare(out[i].BridgeAddress[:], out[j].BridgeAddress[:]); c != 0 {
+			return c < 0
+		}
+		return bytes.Compare(out[i].EventSignature[:], out[j].EventSignature[:]) < 0
+	})
+	return out
+}
 
 func makeLookupKey(address common.Address, topic common.Hash) lookupKey {
 	var k lookupKey

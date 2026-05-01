@@ -186,3 +186,57 @@ func TestDetect_SubscriptionsCoverBothLegTypes(t *testing.T) {
 	assert.True(t, hasSource, "expected at least one source subscription for ethereum")
 	assert.True(t, hasDestination, "expected at least one destination subscription for ethereum")
 }
+
+func TestSubscriptions_Ethereum(t *testing.T) {
+	d, err := New("ethereum")
+	require.NoError(t, err)
+
+	subs := d.Subscriptions()
+	assert.Equal(t, d.Len(), len(subs))
+	require.NotEmpty(t, subs)
+
+	var zeroAddr common.Address
+	var zeroTopic common.Hash
+	for _, s := range subs {
+		assert.NotEqual(t, zeroAddr, s.BridgeAddress, "subscription has zero address")
+		assert.NotEqual(t, zeroTopic, s.EventSignature, "subscription has zero topic")
+	}
+}
+
+func TestSubscriptions_UnknownChain(t *testing.T) {
+	d, err := New("unknownchain")
+	require.NoError(t, err)
+
+	subs := d.Subscriptions()
+	assert.Equal(t, 0, len(subs))
+}
+
+func TestSubscriptions_Deterministic(t *testing.T) {
+	d, err := New("ethereum")
+	require.NoError(t, err)
+
+	first := d.Subscriptions()
+	second := d.Subscriptions()
+	assert.Equal(t, first, second, "Subscriptions must return identical slices across calls")
+}
+
+func TestSubscriptions_RoundTripsThroughDetect(t *testing.T) {
+	for _, chain := range []string{ChainArbitrum, ChainBase, ChainBSC, ChainEthereum, ChainOptimism, ChainPolygon} {
+		t.Run(chain, func(t *testing.T) {
+			d, err := New(chain)
+			require.NoError(t, err)
+
+			subs := d.Subscriptions()
+			require.NotEmpty(t, subs, "expected at least one subscription for %s", chain)
+
+			for _, s := range subs {
+				log := &types.Log{
+					Address: s.BridgeAddress,
+					Topics:  []common.Hash{s.EventSignature},
+				}
+				_, ok, _ := d.Detect(log)
+				assert.True(t, ok, "Detect must match every Subscription pair (chain=%s addr=%s topic=%s)", chain, s.BridgeAddress.Hex(), s.EventSignature.Hex())
+			}
+		})
+	}
+}
