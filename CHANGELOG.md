@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/miradorlabs/bridgeevm/compare/v0.2.1...v0.3.0) (2026-05-13)
+
+
+### Features
+
+* add Relay bridge detection across all EVM chains ([#16](https://github.com/miradorlabs/bridgeevm/issues/16)) ([66528b1](https://github.com/miradorlabs/bridgeevm/commit/66528b1e364c5f1ab22348cec4dafccd2939cb5a))
+
+
+### Documentation
+
+* bump CONTRIBUTING prerequisite to Go 1.26 ([#17](https://github.com/miradorlabs/bridgeevm/issues/17)) ([29441d8](https://github.com/miradorlabs/bridgeevm/commit/29441d88e492971d3ae4dfe88148cbec4f4e68ef))
+
 ## [0.2.1](https://github.com/miradorlabs/bridgeevm/compare/v0.2.0...v0.2.1) (2026-05-01)
 
 
