@@ -4,7 +4,7 @@ Thanks for considering a contribution.
 
 ## Prerequisites
 
-- Go ≥ 1.24
+- Go ≥ 1.26 (see `go.mod` for the exact toolchain pin)
 - `make`
 - `golangci-lint` — run `make tools` to install a pinned version into
   `./bin/`, or install system-wide with
