@@ -19,3 +19,8 @@ go.work.sum
 # OS
 .DS_Store
 Thumbs.db
+
+# Secrets — RPC endpoints, API keys, anything else local
+.env
+.env.*
+!.env.example

@@ -29,6 +29,9 @@ var usdt0TestDataJSON []byte
 //go:embed testdata/1inch.json
 var oneInchTestDataJSON []byte
 
+//go:embed testdata/relay.json
+var relayTestDataJSON []byte
+
 type bridgeTestCase struct {
 	Description           string        `json:"description"`
 	Bridge                string        `json:"bridge"`
@@ -86,6 +89,38 @@ func TestCorrelation_AllProtocols(t *testing.T) {
 						"source and destination correlation IDs must match")
 				})
 			}
+		})
+	}
+}
+
+// relaySourceTestCase mirrors bridgeTestCase but omits the destination leg.
+// Relay's destination fill is a bare EOA transfer with the order id in
+// calldata — it emits no log, so there is no destination event to detect.
+// See README and testdata/relay.json for details.
+type relaySourceTestCase struct {
+	Description           string        `json:"description"`
+	Bridge                string        `json:"bridge"`
+	Source                bridgeTestLeg `json:"source"`
+	ExpectedCorrelationID string        `json:"expectedCorrelationId"`
+}
+
+// TestCorrelation_RelaySourceOnly verifies that real Relay source-leg logs
+// captured from every supported chain are detected as the "relay" bridge and
+// produce the expected correlation ID. There is no destination-leg assertion;
+// Relay fills happen as raw transfers with no on-chain event.
+func TestCorrelation_RelaySourceOnly(t *testing.T) {
+	var cases []relaySourceTestCase
+	require.NoError(t, json.Unmarshal(relayTestDataJSON, &cases))
+	require.NotEmpty(t, cases)
+
+	for _, tc := range cases {
+		t.Run(tc.Description, func(t *testing.T) {
+			result := detectOrFatal(t, tc.Source)
+
+			assert.Equal(t, tc.Bridge, result.BridgeName)
+			assert.Equal(t, LegTypeSource, result.LegType)
+			assert.Equal(t, tc.ExpectedCorrelationID, result.CorrelationID,
+				"source correlation ID mismatch")
 		})
 	}
 }
