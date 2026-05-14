@@ -52,18 +52,6 @@ fmt.Printf("%s leg of %s (correlation %s)\n",
 | deBridge        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | USDT0           | ✓ | ✓ | ✓ | ✓ | – | – |
 | 1inch Fusion+   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Relay src       | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-
-Relay is **source-only** in this library: the destination fill is a raw
-EOA transfer with the order id stuck in calldata and emits no log, so
-there is nothing for a log-based detector to match against. Three
-source-side events are detected: `RelayNativeDeposit` and
-`RelayErc20Deposit` on the Relay Depository
-(`0x4cD00E387622C35bDDB9b4c962C136462338BC31`), and
-`FundsForwardedWithData` on the RelayReceiver
-(`0xa5f565650890fba1824ee0f21ebbbf660a179934`). All carry the same
-32-byte `id` used in the destination calldata, so callers that observe
-transactions (not just logs) can pair the legs themselves.
 
 ## API
 
