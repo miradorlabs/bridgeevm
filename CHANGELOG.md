@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/miradorlabs/bridgeevm/compare/v0.3.0...v0.4.0) (2026-05-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove Relay bridge detection ([#20](https://github.com/miradorlabs/bridgeevm/issues/20))
+
+### Features
+
+* remove Relay bridge detection ([#20](https://github.com/miradorlabs/bridgeevm/issues/20)) ([bfba6c3](https://github.com/miradorlabs/bridgeevm/commit/bfba6c3496142da49764fedb84e51abec33ebe08))
+
 ## [0.3.0](https://github.com/miradorlabs/bridgeevm/compare/v0.2.1...v0.3.0) (2026-05-13)
 
 
