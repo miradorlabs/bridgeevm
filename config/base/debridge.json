@@ -24,7 +24,7 @@
     },
     "bridgeTopic": {
       "type": "destination",
-      "hash": "0xd281ee92bab1446041582480d2c0a9dc91f855386bb27ea295faac1e992f7fe4",
+      "hash": "0xc164aca37b9805a1c9027b6f32260a069723a82926f6e9ece4926e4dd3ea8ecf",
       "name": "FulfilledOrder",
       "correlation": [
         {"index": 1, "type": "bytes32", "field": "orderId", "source": "data"}
