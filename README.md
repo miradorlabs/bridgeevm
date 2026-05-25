@@ -51,6 +51,7 @@ fmt.Printf("%s leg of %s (correlation %s)\n",
 | CCTP V2 src/dst | ✓ | ✓ | ✓ | ✓ | ✓ | – | ✓ |
 | deBridge        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | USDT0           | ✓ | ✓ | ✓ | ✓ | – | – | ✓ |
+| XAUt0           | ✓ | ✓ | ✓ | – | – | ✓ | ✓ |
 | 1inch Fusion+   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
 
 ## API
