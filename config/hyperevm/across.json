@@ -1,0 +1,34 @@
+[
+  {
+    "chainName": "hyperevm",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 3",
+    "bridgeContract": {
+      "address": "0x35e63ea3eb0fb7a3bc543c71fb66412e1f6b0e04"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x32ed1a409ef04c7b0227189c3a103dc5ac10e775a15b785dcc510201f7c25ad3",
+      "name": "FundsDeposited",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "hyperevm",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 2",
+    "bridgeContract": {
+      "address": "0x35e63ea3eb0fb7a3bc543c71fb66412e1f6b0e04"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0x44b559f101f8fbcc8a0ea43fa91a05a729a5ea6e14a7c75aa750374690137208",
+      "name": "FilledRelay",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  }
+]

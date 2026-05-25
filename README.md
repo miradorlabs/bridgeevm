@@ -38,20 +38,20 @@ fmt.Printf("%s leg of %s (correlation %s)\n",
 
 ## Coverage
 
-| Bridge       | ethereum | polygon | arbitrum | base | optimism | bsc |
-|--------------|:-:|:-:|:-:|:-:|:-:|:-:|
-| Across V2 src | ✓ | ✓ | ✓ | ✓ | ✓ | – |
-| Across V2 dst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Across V3 src | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Across V3 dst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Stargate V1 src | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Stargate V2 src | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Stargate V2 dst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| CCTP src/dst    | ✓ | ✓ | ✓ | ✓ | ✓ | – |
-| CCTP V2 src/dst | ✓ | ✓ | ✓ | ✓ | ✓ | – |
-| deBridge        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| USDT0           | ✓ | ✓ | ✓ | ✓ | – | – |
-| 1inch Fusion+   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Bridge       | ethereum | polygon | arbitrum | base | optimism | bsc | hyperevm |
+|--------------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Across V2 src | ✓ | ✓ | ✓ | ✓ | ✓ | – | – |
+| Across V2 dst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Across V3 src | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Across V3 dst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
+| Stargate V1 src | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
+| Stargate V2 src | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
+| Stargate V2 dst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
+| CCTP src/dst    | ✓ | ✓ | ✓ | ✓ | ✓ | – | – |
+| CCTP V2 src/dst | ✓ | ✓ | ✓ | ✓ | ✓ | – | ✓ |
+| deBridge        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| USDT0           | ✓ | ✓ | ✓ | ✓ | – | – | ✓ |
+| 1inch Fusion+   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
 
 ## API
 
