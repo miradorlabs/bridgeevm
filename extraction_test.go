@@ -29,6 +29,9 @@ var usdt0TestDataJSON []byte
 //go:embed testdata/1inch.json
 var oneInchTestDataJSON []byte
 
+//go:embed testdata/debridge.json
+var debridgeTestDataJSON []byte
+
 type bridgeTestCase struct {
 	Description           string        `json:"description"`
 	Bridge                string        `json:"bridge"`
@@ -60,6 +63,7 @@ func TestCorrelation_AllProtocols(t *testing.T) {
 		{"CCTP-V2", cctpV2TestDataJSON},
 		{"USDT0", usdt0TestDataJSON},
 		{"1inch", oneInchTestDataJSON},
+		{"deBridge", debridgeTestDataJSON},
 	}
 
 	for _, suite := range suites {
