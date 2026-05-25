@@ -52,6 +52,7 @@ fmt.Printf("%s leg of %s (correlation %s)\n",
 | deBridge        | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | USDT0           | ✓ | ✓ | ✓ | ✓ | – | – | ✓ |
 | XAUt0           | ✓ | ✓ | ✓ | – | – | ✓ | ✓ |
+| WHYPE           | ✓ | – | – | – | ✓ | – | ✓ |
 | 1inch Fusion+   | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | – |
 
 ## API
