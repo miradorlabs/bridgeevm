@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.5.0](https://github.com/miradorlabs/bridgeevm/compare/v0.4.0...v0.5.0) (2026-05-26)
+
+
+### Features
+
+* **config:** add Hyperliquid HyperEVM with CCTP V2, Across, deBridge ([eaf18d8](https://github.com/miradorlabs/bridgeevm/commit/eaf18d80ff985eaa7e12b049bdd4eba728f3d9f7))
+* **config:** add Hyperliquid HyperEVM with CCTP V2, Across, deBridge, USDT0 ([c0cc487](https://github.com/miradorlabs/bridgeevm/commit/c0cc487fb80a0f19c10ec062aa7fe7280a5293ad))
+* **config:** add WHYPE LayerZero OFT for hyperevm, ethereum, optimism ([6ddc57e](https://github.com/miradorlabs/bridgeevm/commit/6ddc57eedae496224f928f53e9b1a0d1d7d7d823))
+* **config:** add XAUt0 LayerZero OFT across 5 chains ([59d6c4f](https://github.com/miradorlabs/bridgeevm/commit/59d6c4fde58463e8367339d7a5b3db4304bc5c82))
+
+
+### Bug Fixes
+
+* **config:** update deBridge FulfilledOrder topic to current contract event ([a746e69](https://github.com/miradorlabs/bridgeevm/commit/a746e69e2d07c5bb6e1c5e26e72f236d985d1422))
+
+
+### Dependencies
+
+* **deps:** Bump github.com/ethereum/go-ethereum from 1.17.2 to 1.17.3 ([#22](https://github.com/miradorlabs/bridgeevm/issues/22)) ([1979034](https://github.com/miradorlabs/bridgeevm/commit/1979034d5d32168d1af22eddaf383b5a7972d5c8))
+
 ## [0.4.0](https://github.com/miradorlabs/bridgeevm/compare/v0.3.0...v0.4.0) (2026-05-14)
 
 
