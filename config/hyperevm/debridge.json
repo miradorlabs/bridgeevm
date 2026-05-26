@@ -1,6 +1,6 @@
 [
   {
-    "chainName": "base",
+    "chainName": "hyperevm",
     "bridgeName": "debridge",
     "bridgeDescription": "deBridge DLN - CreatedOrder (Source)",
     "bridgeContract": {
@@ -16,7 +16,7 @@
     }
   },
   {
-    "chainName": "base",
+    "chainName": "hyperevm",
     "bridgeName": "debridge",
     "bridgeDescription": "deBridge DLN - FulfilledOrder (Destination)",
     "bridgeContract": {
