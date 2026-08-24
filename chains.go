@@ -12,6 +12,7 @@ const (
 	ChainBSC      = "bsc"
 	ChainEthereum = "ethereum"
 	ChainHyperEVM = "hyperevm"
+	ChainLinea    = "linea"
 	ChainOptimism = "optimism"
 	ChainPolygon  = "polygon"
 )

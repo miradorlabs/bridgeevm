@@ -21,6 +21,7 @@ func TestChainConstantsMatchConfigDirs(t *testing.T) {
 		ChainBSC,
 		ChainEthereum,
 		ChainHyperEVM,
+		ChainLinea,
 		ChainOptimism,
 		ChainPolygon,
 	}
