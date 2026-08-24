@@ -1,0 +1,34 @@
+[
+  {
+    "chainName": "linea",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 3",
+    "bridgeContract": {
+      "address": "0x7e63a5f1a8f0b4d0934b2f2327daed3f6bb2ee75"
+    },
+    "bridgeTopic": {
+      "type": "source",
+      "hash": "0x32ed1a409ef04c7b0227189c3a103dc5ac10e775a15b785dcc510201f7c25ad3",
+      "name": "FundsDeposited",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  },
+  {
+    "chainName": "linea",
+    "bridgeName": "across",
+    "bridgeDescription": "Version 2",
+    "bridgeContract": {
+      "address": "0x7e63a5f1a8f0b4d0934b2f2327daed3f6bb2ee75"
+    },
+    "bridgeTopic": {
+      "type": "destination",
+      "hash": "0x44b559f101f8fbcc8a0ea43fa91a05a729a5ea6e14a7c75aa750374690137208",
+      "name": "FilledRelay",
+      "correlation": [
+        {"index": 2, "type": "int", "field": "depositId", "source": "topics"}
+      ]
+    }
+  }
+]
