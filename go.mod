@@ -3,7 +3,7 @@ module github.com/miradorlabs/bridgeevm
 go 1.26.1
 
 require (
-	github.com/ethereum/go-ethereum v1.17.8
+	github.com/ethereum/go-ethereum v1.17.9
 	github.com/stretchr/testify v1.12.1
 )
 
